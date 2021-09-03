@@ -25,8 +25,10 @@
                 "@nestjs/config": "^1.0.1",
                 "@nestjs/core": "^8.0.0",
                 "@nestjs/jwt": "^8.0.0",
+                "@nestjs/microservices": "^8.0.6",
                 "@nestjs/platform-express": "^8.0.0",
                 "@nestjs/sequelize": "^8.0.0",
+                "@nestjs/serve-static": "^2.2.2",
                 "@nestjs/swagger": "^5.0.9",
                 "bcryptjs": "^2.4.3",
                 "class-transformer": "^0.4.0",
@@ -35,12 +37,14 @@
                 "nodemon": "^2.0.12",
                 "pg": "^8.7.1",
                 "pg-hstore": "^2.3.4",
+                "redis": "^3.1.2",
                 "reflect-metadata": "^0.1.13",
                 "rimraf": "^3.0.2",
                 "rxjs": "^7.3.0",
                 "sequelize": "^6.6.5",
                 "sequelize-typescript": "^2.1.0",
-                "swagger-ui-express": "^4.1.6"
+                "swagger-ui-express": "^4.1.6",
+                "uuid": "^8.3.2"
         },
         "devDependencies": {
                 "@nestjs/cli": "^8.0.0",
