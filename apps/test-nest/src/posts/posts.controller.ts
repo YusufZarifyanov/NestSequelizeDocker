@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CreatePostDto } from 'src/users/dto/create-post.dto';
+import { CreatePostDto } from '../users/dto/create-post.dto';
 import { PostsService } from './posts.service';
 
 @Controller('posts')
