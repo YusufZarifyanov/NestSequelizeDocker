@@ -23,7 +23,7 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
-
+Nest.js + docker + redis(test)
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
