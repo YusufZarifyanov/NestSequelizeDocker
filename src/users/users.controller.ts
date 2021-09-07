@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, Res, UseGuards, UsePipes } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { RedisCacheService } from 'src/redis/redis.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { Roles } from '../roles/roles-auth.decorator';
@@ -13,7 +14,9 @@ import { UsersService } from './users.service';
 @ApiTags('Пользователи')
 @Controller('users')
 export class UsersController {
-        constructor(private userService: UsersService) {}
+        private logger = new Logger('AppController');
+
+        constructor(private userService: UsersService, private redisCacheService: RedisCacheService) {}
         @ApiOperation({ summary: 'Создание пользователя' })
         @ApiResponse({ status: 200, type: User })
         @Post()
@@ -48,8 +51,12 @@ export class UsersController {
                 return this.userService.banUser(dto);
         }
 
-        @Get('/redis')
-        hello () {
-                return this.userService.hello()
+        @Get('redis')
+        async hello(@Res() res) {
+                this.logger.log('Adding key testKey');
+                let valueCached = await this.redisCacheService.get('testKey');
+                if (!valueCached) await this.redisCacheService.set('testKey', '345');
+                
+                res.status(200).send({ count: valueCached });
         }
 }

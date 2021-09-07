@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Client, ClientProxy, ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { InjectModel } from '@nestjs/sequelize';
 import { RolesService } from '../roles/roles.service';
 import { AddRoleDto } from './dto/add-role.dto';
@@ -8,7 +9,21 @@ import { User } from './users.model';
 
 @Injectable()
 export class UsersService {
+        @Client({
+                transport: Transport.REDIS,
+                options: {
+                        url: 'redis://localhost:6379',
+                },
+        })
+        private client: ClientProxy;
+
         constructor(@InjectModel(User) private userRepository: typeof User, private roleService: RolesService) {}
+
+        public async accumulate(data: number[]) {
+                console.log('dsjgksdjg');
+                await this.client.connect();
+                // return this.client.send<number, number[]>('add', data);
+        }
 
         async createUser(dto: CreateUserDto) {
                 const user = await this.userRepository.create(dto);
